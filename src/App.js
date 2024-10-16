@@ -3,7 +3,7 @@ import axios from 'axios';
 import './App.css';
 
 const CitySearch = () => {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchData,  setSearchData] = useState('');
   const [cities, setCities] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -53,12 +53,12 @@ const CitySearch = () => {
     }
   };
 
-  const handleSearch = () => {
+  const inputSearch = () => {
     if (limit > 10) {
       setWarning('You cannot fetch more than 10 items.');
       return;
     }
-    fetchCities(searchTerm);
+    fetchCities(searchData);
   };
 
   const handleLimitChange = (e) => {
@@ -83,10 +83,10 @@ const CitySearch = () => {
         <input
           type="text"
           placeholder="Search for a city"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          value={searchData}
+          onChange={(e) => setSearchData(e.target.value)}
         />
-        <button onClick={handleSearch}>Search</button>
+        <button onClick={inputSearch}>Search</button>
       </div>
 
       <div className="limit-input">
@@ -106,6 +106,7 @@ const CitySearch = () => {
       {loading ? (
         <div className="spinner">Loading...</div>
       ) : (
+        <div className="table-container">
         <table className="cities-table">
           <thead>
             <tr>
@@ -125,7 +126,9 @@ const CitySearch = () => {
                   <td>{indexOfFirstItem + index + 1}</td>
                   <td>{city.name}</td>
                   <td>
-                    {city.country} <img src={`https://flagsapi.com/${city.countryCode}/flat/32.png`} alt={city.country} />
+                    <div className='city_data'>
+                      {city.country} <img src={`https://flagsapi.com/${city.countryCode}/flat/32.png`} alt={city.country} />
+                    </div>
                   </td>
                 </tr>
               ))
@@ -136,6 +139,7 @@ const CitySearch = () => {
             )}
           </tbody>
         </table>
+        </div>
       )}
 
       {!error && cities.length > 0 && (

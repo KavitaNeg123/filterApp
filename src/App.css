@@ -134,17 +134,45 @@
   margin-top: 20px;
   border-collapse: collapse;
 }
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+}
 
-.cities-table th,
+.cities-table th{
+  padding: 8px;
+  border-bottom: 2px solid black;
+}
 .cities-table td {
   padding: 8px;
   border-top: 1px solid rgb(222, 226, 230);
+}
+.cities-table td:last-child {
+  padding: 8px;
+  border-top: 1px solid rgb(222, 226, 230);
+}
+.cities-table tr:last-child td {
+  padding: 8px;
   border-bottom: 1px solid rgb(222, 226, 230);
 }
-
+.cities-table td:first-child{
+  font-weight: 700;
+}
 .cities-table th {
   font-weight: 700;
-  background-color: #f2f2f2;
   text-align: left;
+}
+.city_data{
+  display: flex;
+  align-items: center;
+}
+.search-bar{
+  display: flex;
+}
+@media only screen and (max-width: 300px){
+  .search-bar input {
+    width: 150px;
+    height: 30px;
+}
 }
 
